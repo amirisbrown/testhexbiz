@@ -1,15 +1,15 @@
 
 @font-face {
-  font-family: Palanquin;
-  src: url(../fonts/Palanquin/Palanquin-Medium.ttf);
+	font-family: Palanquin;
+	src: url(../fonts/Palanquin/Palanquin-Medium.ttf);
 }
 
 body {
 	font-weight: 400;
-    line-height: 1.5;
+	line-height: 1.5;
 	margin: 0;
-    font-family: "Palanquin";
-    -webkit-font-smoothing: antialiased;
+	font-family: "Palanquin";
+	-webkit-font-smoothing: antialiased;
 }
 
 /*
@@ -61,7 +61,7 @@ body {
 	/*max-width: 33.333333%;*/
 	min-width: 250px!important;
 	border: 1px blue;
-/*	margin: 3px;*/
+	/*	margin: 3px;*/
 	width: 33%;
 	background-color: #fff;
 	color: black;
@@ -95,9 +95,9 @@ body {
 	display:block;
 	clear:both;
 }
- .d-md-block {
-	 clear: both;
- }
+.d-md-block {
+	clear: both;
+}
 
 .flex-wrap {
 	display: flex;
@@ -111,19 +111,19 @@ body {
 
 .stat-text {
 	font-family: "Arial";
-    font-size: 15px;
-    /*background-color: #fff;*/
-    margin-top: 7px!important;
-    color: grey;
-    text-align: left;
+	font-size: 15px;
+	/*background-color: #fff;*/
+	margin-top: 7px!important;
+	color: grey;
+	text-align: left;
 }
 
 .table-title {
-    margin-top: 8px;
-    padding: 5px;
-    color: #fff;
-    text-align: left;
-    background-color: #49a9ff;
+	margin-top: 8px;
+	padding: 5px;
+	color: #fff;
+	text-align: left;
+	background-color: #49a9ff;
 }
 
 .table-cell .stat-text .row
@@ -131,11 +131,11 @@ body {
 	background-color: transparent;
 }
 .hex-business-text{
-    width: 140px;
-    height: 96px;
-    float: left;
-    position: relative;
-    margin-top: 0px;
+	width: 140px;
+	height: 96px;
+	float: left;
+	position: relative;
+	margin-top: 0px;
 }
 .inline-blocks {
 	display: flex !important;
@@ -146,28 +146,28 @@ body {
 .menu{
 	display:none;
 	background-color: rgb(0, 0, 0);
-    width: 400px;
-    height: 100%;
-    z-index: 3000;
-    position: fixed;
-    top: 0px;
-    right: 0px;
-    padding-top: 40px;
-    overflow-y: scroll;
-    background-image: linear-gradient(0deg, rgb(69, 184, 255), rgb(137, 65, 252));
+	width: 400px;
+	height: 100%;
+	z-index: 3000;
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	padding-top: 40px;
+	overflow-y: scroll;
+	background-image: linear-gradient(0deg, rgb(69, 184, 255), rgb(137, 65, 252));
 }
 
 .menu-item{
 	margin-left: 60px!important;
-    font-size: 22px;
-    font-weight: 700;
-    text-align: left;
+	font-size: 22px;
+	font-weight: 700;
+	text-align: left;
 }
 
 .menu-title {
 	font-size: 42px;
-    padding-left: 10px;
-    margin-left: 30px !important;
+	padding-left: 10px;
+	margin-left: 30px !important;
 }
 
 .expand {
@@ -187,10 +187,10 @@ body {
 }
 
 .close-button {
-    position: fixed;
-    top: 10px;
-    right: 15px;
-    width: 25px;
+	position: fixed;
+	top: 10px;
+	right: 15px;
+	width: 25px;
 }
 
 .inline-tables .table-cell {
@@ -364,7 +364,7 @@ body {
 	}
 
 	.currLabel{
-			width: 80px;
+		width: 80px;
 		float:left;
 	}
 
@@ -394,17 +394,27 @@ body {
 	.youtubeEmbed {
 		width: 480px;
 		height: 320px;
-	}}
+	}
+	.email-input{
+		width:420px!important;;
+	}
+}
 @media only screen and (max-width: 480px) {
 	.youtubeEmbed {
 		width: 356px;
 		height: 240px;
-	}}
+	}	.email-input{
+			 width:340px!important;;
+		 }
+}
 @media only screen and (max-width: 360px) {
 	.youtubeEmbed {
 		width: 300px;
 		height: 200px;
-	}}
+	}	.email-input{
+			 width:300px!important;;
+		 }
+}
 @media only screen and (max-width: 320px) {
 	.youtubeEmbed {
 		display:none;
@@ -413,4 +423,38 @@ body {
 	.project-icons{
 		padding-bottom: 50px;
 	}
+	.email-input{
+		width:250px!important;
+	}
+
+}
+.email-input{
+	width:600px;
+	height-min: 16px !important;
+}
+.emailform{
+	width:auto;
+	background-color: transparent;
+	color: #98cef5;
+	font-weight: bold;
+	margin: auto;
+	padding: 10px;
+}
+.sign-up {
+	border: 5px solid #98cef5;
+	width: 250px !important;
+	margin:auto;
+
+}
+.email-input, .sign-up  {
+	border-top-left-radius: 6px;
+	-webkit-border-top-right-radius: 6px;
+	-moz-border-radius-topright: 6px;
+	border-top-right-radius: 6px;
+	-webkit-border-bottom-right-radius: 6px;
+	-moz-border-radius-bottomright: 6px;
+	border-bottom-right-radius: 6px;
+	-webkit-border-bottom-left-radius: 6px;
+	-moz-border-radius-bottomleft: 6px;
+	border-bottom-left-radius: 6px;
 }
