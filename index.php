@@ -49,7 +49,7 @@ else
 	<div class="App">
 		<div class="menu" id="menu"><a name="menu"></a>
 			<div class="menu-item  closeButton">
-				<a href="#" id="menuclose"><img class="close-button"
+				<a href="#outsideMenu"><img class="close-button"
 							src="data:image/png;base64,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"
 					> </a>
 			</div>
@@ -178,7 +178,7 @@ else
 			     class="headroom headroom--unfixed">
 
 
-				<nav class="App-header bottom-shadow navbar navbar-expand navbar-light desktop-nav">
+				<nav class="App-header bottom-shadow navbar navbar-expand navbar-light">
 
 
 					<a href="#" class="navbar-brand">
@@ -193,23 +193,22 @@ else
 
 
 					<ul class="navbar-nav ml-auto">
+						<li class="my-auto hand">
+							<a href="./index.php?lang=en"><img src="./static/media/entranslation.jpg" alt="Use English" class="langImage"> </a>
+						</li>
+						<li class="my-auto hand">
+							<a href="./index.php?lang=cn"><img src="./static/media/cntranslation.jpg" alt="使用中文" class="langImage"> </a>
+						</li>
+
 						<li class="my-auto hand" id='approve'>
 							<img src="./static/media/metamask.2c92daf3.png" class="metamask-button"
 							     alt="Connect MetaMask">
 						</li>
-						<li class="my-auto hand margin-5 d-flex">
-							<a href="./index.php?lang=en"><img src="./static/media/entranslation.png" alt="Use English" class=" "> </a>
-						</li>
-						<li class="my-auto hand margin-30 d-flex">
-							<a href="./index.php?lang=cn"><img src="./static/media/cntranslation.png" alt="使用中文" class=" "> </a>
-						</li>
-
-						
 
 						<li class="my-auto">
 							<div>
 
-								<a href="#" class="openButton" id="menuopen">
+								<a href="#menu" class="openButton">
 									<!-- will clean this mess up later -->
 									<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAG0AAABVCAYAAABD0WqWAAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9kTtIw0Acxr8+pKIVQTuIOGSoThZ8IY5ahSJUCLVCqw4ml76gSUOS4uIouBYcfCxWHVycdXVwFQTBB4iTo5Oii5T4v6TQIsaD4358d9/H3XeAv15mqhkcA1TNMlKJuJDJrgqhVwTRh26MIywxU58TxSQ8x9c9fHy9i/Es73N/jh4lZzLAJxDPMt2wiDeIpzctnfM+cYQVJYX4nHjUoAsSP3JddvmNc8FhP8+MGOnUPHGEWCi0sdzGrGioxFPEUUXVKN+fcVnhvMVZLVdZ8578heGctrLMdZpDSGARSxAhQEYVJZRhIUarRoqJFO3HPfyDjl8kl0yuEhg5FlCBCsnxg//B727N/OSEmxSOAx0vtv0xDIR2gUbNtr+PbbtxAgSegSut5a/UgZlP0mstLXoE9G4DF9ctTd4DLneAgSddMiRHCtD05/PA+xl9UxbovwW61tzemvs4fQDS1FXyBjg4BEYKlL3u8e7O9t7+PdPs7wdVH3KbR7qlWwAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+QEEg0eKkmzr7oAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAABxUlEQVR42u3bsWoUURyF8e9EsA0ItmkjphSsFAsrYUEEC0EEq4ASyBsIQp5BMY1g4QMIC1ZCGsUiIAQCVkKqtIFAwObajMNkUdJEcv/y/WCbne4c7szswgGVk79daK3dAVaN6ML8BHaS/DiztNbaM2ALuGJuXfgCPE/y7Y+ltdbeAU/MqTsnwL0kO6dKG07YK/Pp1gGwluR4aSjsEvDSXLq2ArwAWBq+uAlcNZfuPZiWtmIeZU7bWNqxeZRwNC1tzzxK2BtLS3IAzM2ke9uLr/yrwFdg2Wy69CHJ/entkSTfgdveKrs9YY/HrhavttYuAxvALeCGb5YXZnf4vP/9T4gkSZIkSZIkSZIkSZIk6Tw53+2X893CnO8W5Xy3KOe7BTnfLcr5btHT5ny3GOe7BTnfLcj5bjHOdwueMOe7BTjflSRJkiRJkiRJkiRJkqR/yvluv5zvFnbmfPct8NScunMCzJJ8OlVaa20deGM+3ToCriU5nM53t8yla8vAJjjfrebhtDRHFjU43y36M8D5bjG7Y2nDfPejmXTv9eIr/3XgM853ezVPMpveHkmyD9wF9s2nO9vAo7GrxavOd7t6fjnf/V/8AkkMlOopfThoAAAAAElFTkSuQmCC"
 									     class="menu-icon" alt="menu">
@@ -222,53 +221,7 @@ else
 
 
 				</nav>
-				<nav class="App-header bottom-shadow navbar navbar-expand navbar-light mobile-nav">
 
-					<div class='d-flex mobile-hamb'>
-						<a href="#" class="navbar-brand">
-
-
-							<!-- will clean this mess up later -->
-							<img src="data:image/png;base64,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"
-								alt="hex business logo" class="top-image" lang="en"> <?php echo $phrases['beta'] ?>
-
-
-						</a>
-
-
-						<ul class="navbar-nav ml-auto">
-							 
-							<li class="my-auto hand" id='approve'>
-								<img src="./static/media/metamask.2c92daf3.png" class="metamask-button"
-									alt="Connect MetaMask">
-							</li>
-
-							<li class="my-auto">
-								<div>
-
-									<a href="#" class="openButton" id="menuopen">
-										<!-- will clean this mess up later -->
-										<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAG0AAABVCAYAAABD0WqWAAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9kTtIw0Acxr8+pKIVQTuIOGSoThZ8IY5ahSJUCLVCqw4ml76gSUOS4uIouBYcfCxWHVycdXVwFQTBB4iTo5Oii5T4v6TQIsaD4358d9/H3XeAv15mqhkcA1TNMlKJuJDJrgqhVwTRh26MIywxU58TxSQ8x9c9fHy9i/Es73N/jh4lZzLAJxDPMt2wiDeIpzctnfM+cYQVJYX4nHjUoAsSP3JddvmNc8FhP8+MGOnUPHGEWCi0sdzGrGioxFPEUUXVKN+fcVnhvMVZLVdZ8578heGctrLMdZpDSGARSxAhQEYVJZRhIUarRoqJFO3HPfyDjl8kl0yuEhg5FlCBCsnxg//B727N/OSEmxSOAx0vtv0xDIR2gUbNtr+PbbtxAgSegSut5a/UgZlP0mstLXoE9G4DF9ctTd4DLneAgSddMiRHCtD05/PA+xl9UxbovwW61tzemvs4fQDS1FXyBjg4BEYKlL3u8e7O9t7+PdPs7wdVH3KbR7qlWwAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+QEEg0eKkmzr7oAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAABxUlEQVR42u3bsWoUURyF8e9EsA0ItmkjphSsFAsrYUEEC0EEq4ASyBsIQp5BMY1g4QMIC1ZCGsUiIAQCVkKqtIFAwObajMNkUdJEcv/y/WCbne4c7szswgGVk79daK3dAVaN6ML8BHaS/DiztNbaM2ALuGJuXfgCPE/y7Y+ltdbeAU/MqTsnwL0kO6dKG07YK/Pp1gGwluR4aSjsEvDSXLq2ArwAWBq+uAlcNZfuPZiWtmIeZU7bWNqxeZRwNC1tzzxK2BtLS3IAzM2ke9uLr/yrwFdg2Wy69CHJ/entkSTfgdveKrs9YY/HrhavttYuAxvALeCGb5YXZnf4vP/9T4gkSZIkSZIkSZIkSZIk6Tw53+2X893CnO8W5Xy3KOe7BTnfLcr5btHT5ny3GOe7BTnfLcj5bjHOdwueMOe7BTjflSRJkiRJkiRJkiRJkqR/yvluv5zvFnbmfPct8NScunMCzJJ8OlVaa20deGM+3ToCriU5nM53t8yla8vAJjjfrebhtDRHFjU43y36M8D5bjG7Y2nDfPejmXTv9eIr/3XgM853ezVPMpveHkmyD9wF9s2nO9vAo7GrxavOd7t6fjnf/V/8AkkMlOopfThoAAAAAElFTkSuQmCC"
-											class="menu-icon" alt="menu">
-									</a>
-
-								</div>
-							</li>
-
-						</ul>
-
-					</div>
-					<ul class="navbar-nav ml-auto">
-							<li class="my-auto hand margin-5">
-								<a href="./index.php?lang=en"><img src="./static/media/entranslation.png" alt="Use English" class="langImage"> </a>
-							</li>
-							<li class="my-auto hand">
-								<a href="./index.php?lang=cn"><img src="./static/media/cntranslation.png" alt="使用中文" class="langImage"> </a>
-							</li>
-
-							 
-						</ul>
-				</nav>
 
 			</div>
 
@@ -652,8 +605,8 @@ else
 						                                 class="section-icon img-fluid" alt="hex money"></div>
 					</div>
 					<div class="justify-content-center row">
-						<div class="col-9"><p class="title"><?php echo $phrases['put'] ?>strong><?php echo $phrases['convert_to'] ?></strong><span
-											lang="en">hex money</span></strong>
+						<div class="col-9"><p class="title"><?php echo $phrases['put'] ?><strong><?php echo $phrases['convert_to'] ?></strong><span
+											lang="en">hex money</span>
 								(HXY) </p></div>
 					</div>
 					<div class="justify-content-center row">
@@ -673,10 +626,10 @@ else
 								<div class="my-auto money-text money-col col-md-auto col-12"><strong><?php echo $phrases['i_want'] ?></strong></div>
 								<div class="my-auto money-col col">
 									<div role="group" class="w-100 btn-group btn-group-toggle"><label
-												class="my-auto select-button btn active btn-light" id='freeze'><input
+												class="my-auto select-button btn active btn-light"><input
 													name="freeze-unfreeze" type="radio" autocomplete="off" value="0"
 													checked=""><?php echo $phrases['freeze'] ?></label><label
-												class="my-auto select-button btn btn-light" id='unfreeze'><input
+												class="my-auto select-button btn btn-light"><input
 													name="freeze-unfreeze"
 													type="radio"
 													autocomplete="off"
@@ -698,53 +651,53 @@ else
 						<div class="no-padding col-md-6 col-12">
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_supply'] ?></div>
-								<div class="col-6"><strong lang="en" id="total_supply">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['hxy_amount_frozen'] ?></div>
-								<div class="col-6"><strong lang="en" id="frzoneTokenBalance">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['current_supply'] ?></div>
-								<div class="col-6"><strong lang="en" id="calculating_supply">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['approved_amount'] ?></div>
-								<div class="col-6"><strong lang="en" id="approved_amount">0 HEX</strong></div>
+								<div class="col-6"><strong lang="en">0 HEX</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_airdrop_amount'] ?></div>
-								<div class="col-6"><strong lang="en" id="total_approved">0 HEX</strong></div>
+								<div class="col-6"><strong lang="en">0 HEX</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_hxy_conversion'] ?></div>
-								<div class="col-6"><strong id="total_hxy_conversion">0 HXY</strong></div>
+								<div class="col-6"><strong>0 HXY</strong></div>
 							</div>
 						</div>
 						<div class="no-padding col-md-6 col-12">
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['hxy_locked'] ?></div>
-								<div class="col-6"><strong lang="en" id="locked_tokens">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['your_hxy_interest'] ?></div>
-								<div class="col-6"><strong lang="en" id="interest">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['your_frozen_hxy'] ?></div>
-								<div class="col-6"><strong id="tokenFrozenBalances">0 HXY</strong></div>
+								<div class="col-6"><strong>0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['maximum_supply'] ?></div>
-								<div class="col-6"><strong lang="en" id="maxSupply">0 HXY</strong></div>
+								<div class="col-6"><strong lang="en">0 HXY</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['Your_airdropped_dividends'] ?></div>
-								<div class="col-6"><strong lang="en" id="your_airdropped_divs">0 HEX</strong></div>
+								<div class="col-6"><strong lang="en">0 HEX</strong></div>
 							</div>
 							<div class="table-cell stat-text stat-cell row">
 								<div class="col-6"><?php echo $phrases['total_hex_conversion'] ?></div>
-								<div class="col-6"><strong id="total_hex_conversion">0 HEX</strong></div>
+								<div class="col-6"><strong>0 HEX</strong></div>
 							</div>
 						</div>
 					</div>
@@ -892,52 +845,9 @@ else
 </body>
 
 <script>
-
-    var menuArea = document.getElementById('menu');
-
-	document.getElementById("menuopen").addEventListener("click", function(e){
-		e.stopPropagation();
-		document.getElementById('menu').style.display = "block";
-	});
-
-	document.getElementById("menuclose").addEventListener("click", function(e){
-		e.stopPropagation();
-		document.getElementById('menu').style.display = "none";
-	});
-
-    document.addEventListener('click', function(event) {
-        var isClickInside = menuArea.contains(event.target);
-        if (isClickInside) {
-        	var menuClose = document.getElementById('menuclose');
-
-        	if (menuClose.contains(event.target)) {
-        		document.getElementById('menu').style.display = "block";
-        	}
-        }
-        else {
-        	var menuOpen = document.getElementById('menuopen');
-
-        	if (!menuOpen.contains(event.target)) {
-        		document.getElementById('menu').style.display = "none";	
-        	}
-        	else {
-        		document.getElementById('menu').style.display = "block";	
-        	}
-        }
-    });
-
-
 	document.getElementById("approve").addEventListener("click", function(e){
 		e.stopPropagation();
 		showModal();
-	});
-	document.getElementById("freeze").addEventListener("click", function(e){
-		document.getElementById("freeze").classList.add("active");
-		document.getElementById("unfreeze").classList.remove("active");
-	});
-	document.getElementById("unfreeze").addEventListener("click", function(e){
-		document.getElementById("unfreeze").classList.add("active");
-		document.getElementById("freeze").classList.remove("active");
 	});
 	document.getElementById("modal_close").addEventListener("click", hideModal);
 	document.getElementById("modal-back").addEventListener("click", hideModal);
