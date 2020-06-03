@@ -57,18 +57,25 @@
 	'project'                          => 'Project',
 	'proceed'                          => 'Proceed',
 	'approve_token'					   => 'Approve Tokens',
+	'tokens'						   => 'tokens',
+	'approve'						   => 'Approve',
 	'on'                               => 'about',
+	'no_metamask'					   => 'Please connect to metamask first&#46; Thanks&#46;',
+	'in_processing'				       => 'You can confirm your action in metamask transaction&#46;',
+	'no_input'				       	   => 'You need to input first&#46; Thanks&#46;',
 	'for_more_information_subscribe'   => 'For more information please <strong> subscribe </strong>' ,
 	'email'	=> 'Email',
 	'subscription' => 'submit',
-	'subscribe_no_email' => 'You did not include an email&#46;  Please use your browser to go back, or click <a href="./index&#46;php&#63;lang&#61;en"> HERE </a> and enter one',
-	'subscribe_invalid_email' => 'That is not a valid email&#46;  Please use your browser to go back, or click <a href="./index&#46;php&#63;lang&#61;en"> HERE </a> and enter one&#46;',
-	'subscribe_good' => 'Thank you for subscribing to our notification service&#46;  You will soon get an email, confirming your interest&#46; 
+	'subscribe_no_email' => 'You did not include an email&#46;  Please use your browser to go back&#44; or click <a href="./index&#46;php&#63;lang&#61;en"> HERE </a> and enter one',
+	'subscribe_invalid_email' => 'That is not a valid email&#46;  Please use your browser to go back&#44; or click <a href="./index&#46;php&#63;lang&#61;en"> HERE </a> and enter one&#46;',
+	'subscribe_good' => 'Thank you for subscribing to our notification service&#46;  You will soon get an email&#44; confirming your interest&#46; 
 	Please reply to that and you will be signed up for our notifications&#46;
 	You can use your browser back button or click <a href="./index&#46;php&#63;lang&#61;en"> HERE </a> to return to the site&#46;',
 	'subscribe_error' => '<h3>Ouch&#46; That send failed&#46; We are sorry, and ask you to come back in a few hours<br/>
 	You can use your browser back button or click <a href="./index&#46;php&#63;lang&#61;en"> HERE </a> to return to the site&#46;',
 	'copy_right' => 'Copyright &#169; 2020 Hex Business &#45; All Rights Reserved&#46;',
 	'privacypolicy'	=> 'PRIVACY&nbsp;POLICY',
-	'entered_invalid_email' 	=> 'You have entered an invalid email address!',
+	'entered_invalid_email' 	=> 'You have entered an invalid email address&#33;',
+	'token_expired' => 'Sorry&#46; Your token expired!',
+	'invalid_request' => 'It`s not the valid request! <a href="./index&#46;php&#63;lang&#61;cn"> Try again by clicking here! </a> '
 ];

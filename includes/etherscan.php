@@ -1,120 +1,172 @@
 
   <?php
-
+  include_once __DIR__.'/base.php';
   require_once  __DIR__ . '/config.php';
+  
+  Class Etherscan extends Base{
 
-  $config = Config::getEtherConfig();
+    private $config;
 
-  function toHexAddress($add){
-    return '0x000000000000000000000000' . substr($add,2);
-  }
+    public function __construct(Config $config)
+    {
+      $this->verifyToken();
+      $this->config = $config;
+    }
 
-  if(isset($_POST['account']) ){
+    /**
+     * response etherscan api results
+     *
+     * @param  int  $id
+     * @return Json
+    */
 
-    $acc = $_POST['account'];
-    $airdropContract = $config['airdropContract'];
-    $hexTokenAddress = $config['hexTokenAddress'];
-    $transferTopic = $config['transferTopic'];
-    $apiKey = $config['apiKey'];
-    $address= $config['address'];
-    $topic = $config['topic'];
+    public function init() {
 
-    $stats = getAirdropStats($address,$topic,$airdropContract,$acc,$apiKey);
-    $total = getTotalAirdropped($address, $topic,$airdropContract,$apiKey);
-    echo $stats . '&&' . $total;
-    exit();
-  }
-  // else
-  // {
-  //   die("It's not authorized");
-  // }
+      $result = array();
+
+      if(!isset($_POST['account']) && empty($_POST['account']) ){
+          $result['status'] = 404;
+      }
+      else {
+        $acc = trim($_POST['account']);
+
+        try {
+            $stats = $this->getAirdropStats($acc);
+        } catch (Exception $e) {
+            $stats = "invalid";
+        }
+
+        try {
+            $total = $this->getTotalAirdropped();
+        } catch (Exception $e){
+            $total = "invalid";
+        }
+
+        $result['status'] = 200;
+        $result['stats'] = $stats;
+        $result['total'] = $total;
+      }
+
+      echo json_encode($result);
+    }
+
+    /**
+     * response HexAddress
+     *
+     * @param  string  $add
+     * @return string
+    */
+
+    private  function toHexAddress(string $add): string
+    {
+      if (!empty($add) && strlen($add) >= 3) {
+        return '0x000000000000000000000000' . substr($add, 2);  
+      }
+
+    }
+
+    /**
+     * response HexAddress
+     *
+     * @param  string  $add
+     * @return string
+    */
+
+    private  function getAirdropStats(string $acc):int
+    {
+        $airdropContract = $this->config->getEtherConfigAirDropContract();
+        $apiKey          = $this->config->getEtherConfigEtherApiKey();
+        $address         = $this->config->getEtherConfigAddress();
+        $topic           = $this->config->getEtherConfigTopic();
+
+        $cURLConnection = curl_init();
+
+        curl_setopt($cURLConnection, CURLOPT_URL, "https://api.etherscan.io/api?module=logs&action=getLogs&fromBlock=10011880&toBlock=latest&address=".$address."&topic0=".$topic."&topic0_1_opr=and&topic1=".$this->toHexAddress($airdropContract)."&topic1_2_opr=and&topic2=".$this->toHexAddress($acc)."&apikey=".$apiKey);
+        curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array('Content-Type: application/json' ));
+        $res = curl_exec($cURLConnection);
+
+        //an error occurred with the curl
+        if(curl_errno($cURLConnection)) {
+          throw new InvalidArgumentException("invalid");
+        }
+
+        $resultStatus = curl_getinfo($cURLConnection, CURLINFO_HTTP_CODE);
+        curl_close($cURLConnection);
+        if ($resultStatus!==200) {
+          throw new InvalidArgumentException("invalid");
+        }
+
+        return $this->processTotalAirDropped($res);
+    }
+
+    /**
+     * Processing Total Airdropped
+     *
+     * @param  string  $result
+     * @return int
+    */
+    private function processTotalAirDropped(string $result):int
+    {
+        if(empty($result)) {
+            throw new InvalidArgumentException("invalid");
+        }
+        $_totalAirdropped = 0;
+        $jsonArrayResponse = json_decode($result);
+
+        if(!property_exists($jsonArrayResponse, 'result') || !is_array($jsonArrayResponse->result)) {
+            throw new InvalidArgumentException( "invalid");
+        }
+
+        foreach($jsonArrayResponse->result as $item) {
+            if(!property_exists($item, 'data')) {
+                throw new InvalidArgumentException("Invalid");
+            }
+
+            $_totalAirdropped += hexdec($item->data);
+
+        }
+
+        return $_totalAirdropped;
+    }
 
 
- function getAirdropStats($address,$topic,$airdropContract,$acc,$apiKey) {
-    $_totalAirdropped = 0;
- 
-    $cURLConnection = curl_init();
+    /**
+     * Response Total Airdropped
+     *
+     * @return int
+    */
 
-    curl_setopt($cURLConnection, CURLOPT_URL, "https://api.etherscan.io/api?module=logs&action=getLogs&fromBlock=10011880&toBlock=latest&address=".$address."&topic0=".$topic."&topic0_1_opr=and&topic1=".toHexAddress($airdropContract)."&topic1_2_opr=and&topic2=".toHexAddress($acc)."&apikey=".$apiKey);
-    curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array('Content-Type: application/json' ));
-    $res = curl_exec($cURLConnection);
-    
-    if (curl_errno($cURLConnection)) {
-        // this would be your first hint that something went wrong
+    private function getTotalAirdropped():int
+    {
 
-        return "invalid";
-    } else {
-      
-        // check the HTTP status code of the request
+        $airdropContract = $this->config->getEtherConfigAirDropContract();
+        $apiKey          = $this->config->getEtherConfigEtherApiKey();
+        $address         = $this->config->getEtherConfigAddress();
+        $topic           = $this->config->getEtherConfigTopic();
+
+        $cURLConnection = curl_init();
+
+        curl_setopt($cURLConnection, CURLOPT_URL, "https://api.etherscan.io/api?module=logs&action=getLogs&fromBlock=10011880&toBlock=latest&address=" . $address . "&topic0=" . $topic . "&topic0_1_opr=and&topic1=" . $this->toHexAddress($airdropContract) . "&apikey=" . $apiKey);
+        curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        $res = curl_exec($cURLConnection);
+
+        if (curl_errno($cURLConnection)) {
+          throw new InvalidArgumentException("invalid");
+        }
+
         $resultStatus = curl_getinfo($cURLConnection, CURLINFO_HTTP_CODE);
         curl_close($cURLConnection);
 
-        if ($resultStatus != 200) {
-           return "invalid";
+        if ($resultStatus !== 200) {
+            throw new InvalidArgumentException("invalid");
         }
-        else
-        {
-           $jsonArrayResponse = json_decode($res);
-   
-          $arr = $jsonArrayResponse->result;
-          if(is_array($arr))
-          {
-            foreach($arr as $item)
-            {
-              if($item->data)
-                $_totalAirdropped += hexdec($item->data);
-              else return "invalid";
-            }
-            return $_totalAirdropped;
-          }
-         return "invalid";
-        }
+
+        return $this->processTotalAirDropped($res);
     }
-   
-}
-
-
-function getTotalAirdropped($address, $topic,$airdropContract,$apiKey ) {
-  $_totalAirdropped = 0;
-
-  $cURLConnection = curl_init();
-
-  curl_setopt($cURLConnection, CURLOPT_URL, "https://api.etherscan.io/api?module=logs&action=getLogs&fromBlock=10011880&toBlock=latest&address=".$address."&topic0=".$topic."&topic0_1_opr=and&topic1=".toHexAddress($airdropContract)."&apikey=".$apiKey);
-  curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
-  curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array('Content-Type:application/json' ));
-  $res = curl_exec($cURLConnection);
-
-    if (curl_errno($cURLConnection)) {
-      // this would be your first hint that something went wrong
-      return "invalid";
-    } else {
-      // check the HTTP status code of the request
-
-      $resultStatus = curl_getinfo($cURLConnection, CURLINFO_HTTP_CODE);
-      curl_close($cURLConnection);
-
-      if ($resultStatus != 200) {
-         return "invalid";
-      }
-      else
-      {
-         $jsonArrayResponse = json_decode($res);
- 
-        $arr = $jsonArrayResponse->result;
-        if(is_array($arr))
-        {
-           foreach($jsonArrayResponse->result as $item)
-            {
-              $_totalAirdropped += hexdec($item->data);
-            }
-            return $_totalAirdropped;
-        }
-        return "invalid";
-      }
   }
- 
-}
 
- 
+  $obj = new Etherscan(new Config);
+  $obj->init();
 ?>

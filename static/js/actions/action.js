@@ -3,15 +3,14 @@ var xhttp = new XMLHttpRequest();
 
 async function getAccounts() {
 
-	let web3 = new Web3(window.ethereum);
 	accounts = await web3.eth.getAccounts();
+
 	etherscanPost();
 
 	let balanceOf = 0;
 	let tokenFrozenBalances = 0;
 	let freezingReward = 0;
 	let allowance = 0;
-	let metamaskEthBalance = 0;
 
 	let totalSupply = await getTotalSupply();
 	let maxSupply = await getMaxSupply();
@@ -26,7 +25,6 @@ async function getAccounts() {
 		tokenFrozenBalances = await getTokenFrozenBalances(accounts);
 		freezingReward = await getFreezingReward(accounts);
 		allowance = await getAllowance(accounts);
-		metamaskEthBalance = await getMetamaskEthBalance(accounts);
 		
 	}
 
@@ -35,10 +33,9 @@ async function getAccounts() {
 	heartsTransformed = (heartsTransformed / 100000000) ?? 0;
 	tokenFrozenBalances = (tokenFrozenBalances /100000000)??0;
 	balanceOf = (balanceOf /100000000)??0;
-	let interest = (tokenFrozenBalances == 0 ? 0 : (freezingReward / 100000000) ?? 0);
+	let interest = (tokenFrozenBalances === 0 ? 0 : (freezingReward / 100000000) ?? 0);
 	interest = interest.toLocaleString('en-GB');
 	let calculating_supply = ((totalSupply / 100000000) ?? 0) - ((frzoneTokenBalance / 100000000) ?? 0)  - ((lockedToken / 100000000) ?? 0);
-	metamaskEthBalance = (metamaskEthBalance/100000000)??0;
 	totalSupply = Math.floor((totalSupply / 100000000) ?? 0);
 	totalSupply = totalSupply.toLocaleString('en-GB');
 	lockedToken = (lockedToken / 100000000) ?? 0;
@@ -79,7 +76,7 @@ if (window.ethereum) {
 
 async function getTotalSupply() {
 
-	return new Promise (function (resolve, reject) {
+	return new Promise (function (resolve) {
 
 		moneyInstance.methods.totalSupply().call().then(result => {
 			resolve(result);
@@ -92,7 +89,7 @@ async function getTotalSupply() {
 
 
 async function getMaxSupply() {
-	return new Promise (function (resolve, reject) {
+	return new Promise (function (resolve) {
 		moneyInstance.methods._maxSupply().call().then(result => {
 			result = result ? result : 0;
 			resolve(result);
@@ -102,7 +99,7 @@ async function getMaxSupply() {
 
 
 async function getBalanceOf(accounts) {
-	return new Promise (function (resolve, reject) {
+	return new Promise (function (resolve) {
 		moneyInstance.methods.balanceOf(accounts[0]).call().then(result => {
 			result = result ? result : 0;
 			resolve(result);
@@ -112,7 +109,7 @@ async function getBalanceOf(accounts) {
 
 
 async function getTokenFrozenBalances(accounts) {
-	return new Promise (function (resolve, reject) {
+	return new Promise (function (resolve) {
 		moneyInstance.methods.tokenFrozenBalances(accounts[0]).call().then(result => {
 			result = result ? result : 0;
 			resolve(result);
@@ -121,7 +118,7 @@ async function getTokenFrozenBalances(accounts) {
 }
 
 async function getFreezingReward(accounts) {
-	return new Promise (function (resolve, reject) {
+	return new Promise (function (resolve) {
 		moneyInstance.methods.calcFreezingRewards().call({from: accounts[0]}).then(result => {
 			result = result ? result : 0;
 			resolve(result);
@@ -131,17 +128,8 @@ async function getFreezingReward(accounts) {
 
 
 async function getAllowance(accounts) {
-	return new Promise (function (resolve, reject) {
+	return new Promise (function (resolve) {
 		tokenInstance.methods.allowance(accounts[0], moneyAddress).call().then(result => {
-			result = result ? result : 0;
-			resolve(result);
-		});
-	});
-}
-
-async function getMetamaskEthBalance(accounts) {
-	return new Promise (function (resolve, reject) {
-		web3.eth.getBalance(accounts[0]).then(function ( result ) {
 			result = result ? result : 0;
 			resolve(result);
 		});
@@ -150,7 +138,7 @@ async function getMetamaskEthBalance(accounts) {
 
 
 async function getLockedToken() {
-	return new Promise (function (resolve, reject) {
+	return new Promise (function (resolve) {
 		moneyInstance.methods.lockedTokens().call().then(result => {
 			result = result ? result : 0;
 			resolve(result);
@@ -159,7 +147,7 @@ async function getLockedToken() {
 }
 
 async function getFrzoneTokenBalance() {
-	return new Promise (function (resolve, reject) {
+	return new Promise (function (resolve) {
 		moneyInstance.methods.totalFrozenTokenBalance().call().then(result => {
 			result = result ? result : 0;
 			resolve(result);
@@ -168,7 +156,7 @@ async function getFrzoneTokenBalance() {
 }
 
 async function getHxyTransformed() {
-	return new Promise (function (resolve, reject) {
+	return new Promise (function (resolve) {
 		moneyInstance.methods.totalHXYTransformed().call().then(result => {
 			result = result ? result : 0;
 			resolve(result);
@@ -177,7 +165,7 @@ async function getHxyTransformed() {
 }
 
 async function getHeartsTransformed() {
-	return new Promise (function (resolve, reject) {
+	return new Promise (function (resolve) {
 		moneyInstance.methods.totalHeartsTransformed().call().then(result => {
 			result = result ? result : 0;
 			resolve(result);
@@ -187,50 +175,64 @@ async function getHeartsTransformed() {
 
 
 
+function getMeta(metaName) {
+  const metas = document.getElementsByTagName('meta');
+
+  for (let i = 0; i < metas.length; i++) {
+    if (metas[i].getAttribute('name') === metaName) {
+      return metas[i].getAttribute('content');
+    }
+  }
+
+  return '';
+}
 
 
 function etherscanPost() {
 
-	xhttp.open("POST", "includes/etherscan.php", true);
-	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("account="+accounts[0]);
+	if (accounts && accounts.length > 0) {
+		xhttp.open("POST", "includes/etherscan.php", true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhttp.send("account="+accounts[0]+"&token="+getMeta("_csrf"));
 
-	xhttp.onreadystatechange = function() {
+		xhttp.onreadystatechange = function() {
 
-	    if (this.readyState == 4 && this.status == 200) {
-			var arr = this.responseText.split("&&");
-		    var divs = arr[0];
-		    var total = arr[1];
-		    if(arr[0] =='invalid')
-		    	divs = 0;
-		   	if(arr[1] =='invalid')
-		    	total = 0;
+		    if (this.readyState === 4 && this.status === 200) {
+		    	var response = this.responseText;
 
-		    total = total / 100000000;
-			divs = divs / 100000000;	
-		    divs = divs.toLocaleString('en-GB');
-			    total = total.toLocaleString('en-GB');
-		    if(!arr[0].includes('invalid'))
-		    {
-				document.getElementById("total_approved").innerHTML = total + " HXY";
-				document.getElementById("total_approved").style = "";
+		    	var arr = JSON.parse(response);
+
+		    	if (arr.status === 404) {
+		    		return false;
+		    	}
+
+			    var divs = arr.stats;
+			    var total = arr.total;
+
+			    if(divs === 0){
+			    	document.getElementById("your_airdropped_divs").style = "color:red";
+			    	document.getElementById("your_airdropped_divs").innerHTML = "**********";	
+			    }
+			    else {
+					divs = divs / 100000000;	
+				    divs = divs.toLocaleString('en-GB');		    	
+			    	document.getElementById("your_airdropped_divs").style = "";
+					document.getElementById("your_airdropped_divs").innerHTML = divs + " HXY";
+			    }
+			   	if(total === 0){
+			    	document.getElementById("total_approved").innerHTML = "**********";	
+			    	document.getElementById("total_approved").style = "color:red";
+			   	}
+			   	else {
+			   		total = total / 100000000;	
+			   		total = total.toLocaleString('en-GB');
+					document.getElementById("total_approved").innerHTML = total + " HXY";
+					document.getElementById("total_approved").style = "";		   		
+			   	}
+
 		    }
-		    else
-		    {
-		    	document.getElementById("total_approved").innerHTML = "**********";	
-		    	document.getElementById("total_approved").style = "color:red";
-		    }
-			if(!arr[1].includes('invalid'))
-		    {
-		    	document.getElementById("your_airdropped_divs").style = "";
-				document.getElementById("your_airdropped_divs").innerHTML = divs + " HXY";
-		    }
-		    else
-		    {
-		    	document.getElementById("your_airdropped_divs").style = "color:red";
-		    	document.getElementById("your_airdropped_divs").innerHTML = "**********";	
-		    }
-	    }
-	};	
+		};	
+
+	}
 
 }			  
