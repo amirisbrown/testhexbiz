@@ -1,5 +1,9 @@
 <?php
-if (!empty($_GET['lang']) and ($_GET['lang'] == 'en'))
+
+$lang = isset($_GET['lang']) ? $_GET['lang'] : "";
+$email = isset($_POST['email']) ? $_POST['email'] : "";
+
+if (!empty($lang) and ($lang == 'en'))
 {
 	require_once __DIR__ . '/includes/enlang.php';
 }
@@ -8,20 +12,22 @@ else
 	require_once __DIR__ . '/includes/cnlang.php';
 }
 
-if (empty($_POST['email']))
+if (empty($email))
 {
 	$response = $phrases['subscribe_no_email'];
 }
 else
 {
+	$email = trim($email);
+
 	//$emailRegex = ">(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])>i";
 
 	//if (preg_match($emailRegex, $_POST['email']))
-	$email = trim($_POST['email']);
+	
 	if (filter_var($email, FILTER_VALIDATE_EMAIL))
 	{
-		$to      = "announcements-subscribe-" . str_replace('@', '=', $_POST['email']) . '@hexbusiness.net';
-		$from    = $_POST['email'];
+		$to      = "announcements-subscribe-" . str_replace('@', '=', $email) . '@hexbusiness.net';
+		$from    = $email;
 		$subject = $from;
 		$body    = $from;
 
