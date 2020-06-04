@@ -19,40 +19,94 @@ class HandleSubscription extends Base
 {
 	public function __construct()
 	{
-		$this->verifyToken();	
+		$this->verifyToken();
 	}
 
-	public function subscribe(string $lang, string $email, array $phrases): string {
-
+	public function subscribe(string $lang, string $email, array $phrases): string
+	{
 		if (empty($email))
 		{
-			$response = $phrases['subscribe_no_email'];
+			return $phrases['subscribe_no_email'];
 		}
-		else
-		{
-			$email = trim($email);
-			$email = filter_var($email, FILTER_SANITIZE_EMAIL);
-			
-			if (filter_var($email, FILTER_VALIDATE_EMAIL))
-			{
-				$to      = "announcements-subscribe-" . str_replace('@', '=', $email) . '@hexbusiness.net';
-				$from    = $email;
-				$subject = $from;
-				$body    = $from;
+		$email = trim($email);
+		$emailRegex = "~[^\s]+@[^\s]{2,}\.[^\s]{2,}~";
 
-				if ($response = mail($to, $subject, $body, array('From' => $from, 'Reply-To' => $from)))
+		if (preg_match($emailRegex, $email))
+		{
+			//check for any of these bad characters
+			foreach(str_split('!#$%&\*+/=?^_`{|}~<>') as $badchar)
+			{
+				if (mb_stripos($email, $badchar))
 				{
-					$response = $phrases['subscribe_good'];
+					return $phrases['subscribe_invalid_email'];
 				}
-				else
-				{
-					$response = $phrases['subscribe_error'];
-				}
+			}
+
+			//get the tld, which is after the last dot.
+			$parts = explode('.', $email);
+
+			if (count($parts) < 2)
+			{
+				return $phrases['subscribe_invalid_email'];
+			}
+			$tld = $parts[count($parts) -1];
+			unset($parts[count($parts) -1]);
+			$email = implode('.', $parts);
+			//now the domain.
+			$parts = explode('@', $email);
+
+			if (count($parts) < 2)
+			{
+				return $phrases['subscribe_invalid_email'];
+			}
+			$domainPos = count($parts) - 1;
+
+			if (mb_stripos($parts[$domainPos], '.') !== false)
+			{
+				//not a valid domain.
+				return $phrases['subscribe_invalid_email'];
+			}
+			$domain = $parts[$domainPos];
+			unset($parts[$domainPos]);
+			$email = implode('@', $parts);
+			//This looks wrong.  it looks like it should be mb_strlen.  But the spec says 64 bytes not chars
+			if ((strlen($email) > 64) OR ($email == ''))
+			{
+				return $phrases['subscribe_invalid_email'];
+			}
+
+			//if quoted it should start and end with a quote.
+			if (mb_substr($email, 0, 1) == '"')
+			{
+				return $phrases['invalid_email_quoted'];
+			}
+			//if they got here it's probably valid.
+			$domain .='.' . $tld;
+
+			if (!mb_check_encoding($domain, 'ASCII'))
+			{
+				$domain  = idn_to_ascii($domain);
+			}
+
+			$email .= '@' . $domain;
+			$to      = "announcements-subscribe-" . str_replace('@', '=', $email) . '@hexbusiness.net';
+			$from    = $email;
+			$subject = $from;
+			$body    = $from;
+
+			if ($response = mail($to, $subject, $body, array('From' => $from, 'Reply-To' => $from)))
+			{
+				$response = $phrases['subscribe_good'];
 			}
 			else
 			{
-				$response = $phrases['subscribe_invalid_email'];
+				$response = $phrases['subscribe_error'];
 			}
+		}
+		else
+		{
+			die('regex failed?');
+			$response = $phrases['subscribe_invalid_email'];
 		}
 
 		return $response;
