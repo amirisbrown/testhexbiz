@@ -2,6 +2,7 @@
 include_once __DIR__.'/session.php';
 include_once __DIR__.'/base.php';
 require_once  __DIR__ . '/config.php';
+require_once  __DIR__."/../vendor/autoload.php";
 
 use Web3\Web3;
 use Web3\Contract;
