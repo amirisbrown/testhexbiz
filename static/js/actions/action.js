@@ -6,7 +6,7 @@ var freezeEndDate = 0;
 async function getAccounts() {
   accounts = await web3.eth.getAccounts();
   etherscanPost();
-  metamaskPost();  
+  metamaskPost();
 }
 
 if (window.ethereum) {
@@ -28,7 +28,6 @@ function getMeta(metaName) {
 }
 
 function etherscanPost() {
-
   if (accounts && accounts.length > 0) {
     xhttpEtherscan.open("POST", "includes/etherscan.php", true);
     xhttpEtherscan.setRequestHeader(
@@ -48,17 +47,21 @@ function etherscanPost() {
           return false;
         }
 
-        var divs = arr.stats  ? arr.stats : 0;
+        var divs = arr.stats ? arr.stats : 0;
         var total = arr.total ? arr.total : 0;
 
         if (divs === 0) {
-          document.getElementById("your_airdropped_divs").classList.add("invalid");
+          document
+            .getElementById("your_airdropped_divs")
+            .classList.add("invalid");
           document.getElementById("your_airdropped_divs").innerHTML =
             "**********";
         } else {
           divs = divs / 100000000;
           divs = divs.toLocaleString("en-GB");
-          document.getElementById("your_airdropped_divs").classList.remove("invalid");
+          document
+            .getElementById("your_airdropped_divs")
+            .classList.remove("invalid");
           document.getElementById("your_airdropped_divs").innerHTML =
             divs + " HXY";
         }
@@ -77,17 +80,19 @@ function etherscanPost() {
 }
 
 function countdownTimerFreeze(ebdDate, id) {
-
   if (ebdDate) {
     var countDownDate = new Date(ebdDate).getTime();
-    var x = setInterval(function() {
-    var now = new Date().getTime();
-    var distance = countDownDate - now;
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    document.getElementById(id).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+    var x = setInterval(function () {
+      var now = new Date().getTime();
+      var distance = countDownDate - now;
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      document.getElementById(id).innerHTML =
+        days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
       if (distance < 0) {
         clearInterval(x);
       }
@@ -96,7 +101,6 @@ function countdownTimerFreeze(ebdDate, id) {
 }
 
 function metamaskPost() {
-
   if (accounts && accounts.length > 0) {
     xhttpEthernum.open("POST", "includes/ethereum.php", true);
     xhttpEthernum.setRequestHeader(
@@ -125,17 +129,17 @@ function metamaskPost() {
           freezeEndDate = parseInt(parseInt(freezeEndDate) * 1000 + 604800000);
           countdownTimerFreeze(freezeEndDate, "freeze_end");
         }
-        
-        countdownTimerFreeze(new Date().setUTCHours(24,0,0,0), "aa_end");
-        
+
+        countdownTimerFreeze(new Date().setUTCHours(24, 0, 0, 0), "aa_end");
+
         allowance = allowance / 100000000 ?? 0;
         hxyTransformed = hxyTransformed / 100000000 ?? 0;
         heartsTransformed = heartsTransformed / 100000000 ?? 0;
         tokenFrozenBalances = tokenFrozenBalances / 100000000 ?? 0;
         balanceOf = balanceOf / 100000000 ?? 0;
 
-        
-        let interest = tokenFrozenBalances === 0 ? 0 : freezingReward / 100000000 ?? 0;
+        let interest =
+          tokenFrozenBalances === 0 ? 0 : freezingReward / 100000000 ?? 0;
         interest = interest ? interest.toLocaleString("en-GB") : 0;
 
         let calculating_supply =
