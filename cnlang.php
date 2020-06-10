@@ -56,7 +56,7 @@
 	'approve'						   => '确认',
 	'convert_to'                       => '转换成',
 	'approve_token'					   => '代币批准',
-	'convert'                          => '转换成',
+	'convert'                          => '转换',
 	'freeze'                           => '冻结',
 	'thaw'                             => '解冻',
 	'project'                          => '项目',
@@ -74,7 +74,7 @@
 	'subscribe_error' => '<h3>这儿存在一个问题&#46; 该发送失败。 很抱歉，请您几个小时后再回来<br/>
 	您可以使用浏览器的返回键返回&#46; <a href="../index&#46;php&#63;lang&#61;cn"> 或点击这里回到网站 </a>&#46;',
 	'copy_right' => 'Copyright &#169; 2020 Hex Business版权所有 &#45; 保留所有权利',
-	'privacypolicy'	=> '私隱政策',
+	'privacypolicy'	=> '私隐政策',
 	'entered_invalid_email' 	=> '您输入了错误的电子邮件地址&#33;',
 	'token_expired' => 'Sorry&#46; Your token expired!',
 	'invalid_request' => 'It`s not the valid request! <a href="../index&#46;php&#63;lang&#61;cn"> Try again by clicking here! </a> '
